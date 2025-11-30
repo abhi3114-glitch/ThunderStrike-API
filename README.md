@@ -2,7 +2,7 @@
 
 A comprehensive platform for stress-testing APIs with intelligent chaos scenarios and AI-powered post-mortem reports.
 
-## 🚀 Features
+## Features
 
 - **Target API Management**: Register and manage API endpoints for testing
 - **Chaos Scenarios**: 
@@ -13,7 +13,7 @@ A comprehensive platform for stress-testing APIs with intelligent chaos scenario
 - **Metrics Collection**: Detailed performance and error metrics
 - **AI-Powered Reports**: Automated post-mortem analysis with recommendations
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Backend**: Node.js + TypeScript + Express
 - **Database**: MongoDB
@@ -21,23 +21,21 @@ A comprehensive platform for stress-testing APIs with intelligent chaos scenario
 - **Frontend**: React + TypeScript + Vite + Tailwind CSS
 - **AI**: OpenAI API integration (configurable)
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Node.js 18+ and npm/pnpm
 - Docker and Docker Compose (for MongoDB and Redis)
 - Git
 
-## 🔧 Setup Instructions
+## Setup Instructions
 
 ### 1. Clone the Repository
-
 ```bash
 git clone https://github.com/abhi3114-glitch/ThunderStrike-API.git
 cd ThunderStrike-API
 ```
 
 ### 2. Install Dependencies
-
 ```bash
 # Install backend dependencies
 cd backend
@@ -51,7 +49,6 @@ npm install
 ### 3. Environment Configuration
 
 Create `.env` file in the `backend` directory:
-
 ```env
 # Server
 PORT=3001
@@ -75,28 +72,48 @@ FRONTEND_URL=http://localhost:5173
 ### 4. Start Infrastructure Services
 
 Start MongoDB and Redis using Docker Compose:
-
 ```bash
 docker-compose up -d
 ```
 
 ### 5. Run the Application
 
-**Backend:**
+**IMPORTANT:** You must run the following processes in separate terminals:
+
+**Terminal 1 - Backend API:**
 ```bash
 cd backend
 npm run dev
 ```
 
-**Frontend:**
+**Terminal 2 - Chaos Worker (REQUIRED):**
+```bash
+cd backend
+npm run worker
+```
+
+**Note:** The chaos worker is essential for processing test jobs. Without it, tests will remain in "queued" status indefinitely.
+
+**Terminal 3 - Frontend:**
 ```bash
 cd frontend
 npm run dev
 ```
 
-The backend will run on `http://localhost:3001` and frontend on `http://localhost:5173`.
+The application will be available at:
+- Backend API: `http://localhost:3001`
+- Frontend: `http://localhost:5173`
 
-## 📚 API Documentation
+### Verify Installation
+
+You should see the following confirmations:
+- MongoDB connected successfully
+- Redis connected successfully
+- API server running on port 3001
+- Chaos test worker started and listening for jobs
+- Frontend development server running
+
+## API Documentation
 
 ### Targets
 
@@ -115,15 +132,14 @@ The backend will run on `http://localhost:3001` and frontend on `http://localhos
 
 - `GET /api/reports/:id` - Get AI-generated post-mortem report
 
-## 🧪 Chaos Scenarios
+## Chaos Scenarios
 
 1. **Latency Testing**: Simulates variable network delays
 2. **Payload Corruption**: Tests API resilience with malformed data
 3. **Auth Failure**: Validates authentication error handling
 4. **Rate Limit/Burst**: Tests API behavior under high load
 
-## 🏗️ Project Structure
-
+## Project Structure
 ```
 thunderstrike-api/
 ├── backend/
@@ -147,16 +163,16 @@ thunderstrike-api/
 └── docker-compose.yml
 ```
 
-## 🔒 Security Notes
+## Security Notes
 
 - Never commit `.env` files or API keys to the repository
 - The provided GitHub token in the project description should be rotated immediately
 - Use environment variables for all sensitive configuration
 
-## 📝 License
+## License
 
 MIT License
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request.
